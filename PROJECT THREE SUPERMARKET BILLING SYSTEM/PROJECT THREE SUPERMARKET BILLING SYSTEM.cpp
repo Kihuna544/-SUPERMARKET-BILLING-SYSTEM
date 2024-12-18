@@ -165,9 +165,12 @@ void shopping::add() {
 		data.open("database.txt", ios::app | ios::out);
 		data << " " << pcode << " " << pname << " " << price << " " << dis << "\n";
 	}
-	else
+	else if(!data)
 	{
 		data >> c >> n >> p >> d;
+	}
+	else {
+		cout << "mee";
 	}
 
 
