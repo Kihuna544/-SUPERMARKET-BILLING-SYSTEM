@@ -112,7 +112,6 @@ void shopping::admininstrator() {
 		cout << "Invalid choice";
 
 	}
-	//goto m;
 }
 
 void shopping::buyer() {
