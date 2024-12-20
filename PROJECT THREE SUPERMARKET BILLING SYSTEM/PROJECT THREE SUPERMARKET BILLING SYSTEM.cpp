@@ -53,21 +53,18 @@ void shopping::menu() {
 		{
 			admininstrator();
 		}
-		else
-		{
-			cout << "invalid user name or password";
+			else {
+				cout << "Invalid username or password\n";
 		}
 
 		break;
 
-
-	case 2: {
+		case 2:
 		buyer();
 	}
 
 	case 3: {
 		exit(0);
-	}
 
 	default: {
 		cout << "Please select from the given choices";
