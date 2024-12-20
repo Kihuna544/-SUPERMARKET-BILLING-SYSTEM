@@ -4,137 +4,130 @@
 using namespace std;
 
 class shopping {
-	private:
-		int pcode;
-		int price;
-		float dis;
-		string pname;
+private:
+	int pcode;
+	int price;
+	float dis;
+	string pname;
 
-	public:
-		void menu();
-		void admininstrator();
-		void buyer();
-		void add();
-		void edit();
-		void rem();
-		void list();
-		void receipt();
+public:
+	void menu();
+	void admininstrator();
+	void buyer();
+	void add();
+	void edit();
+	void rem();
+	void list();
+	void receipt();
 };
 
 void shopping::menu() {
-	
-	int choice;
-	string email;
-	string password;
+	while (true) { // Replaces the 'goto m;'
+		int choice;
+		string email;
+		string password;
 
-	cout << "\t\t\t\t\t_________________________________\n";
-	cout << "\t\t\t\t\t                                 \n";
-	cout << "\t\t\t\t\t      SUPERMARKET MAIN MENU      \n";
-	cout << "\t\t\t\t\t                                 \n";
-	cout << "\t\t\t\t\t_________________________________\n";
-	cout << "\t\t\t\t\t                                 \n";
-	cout << "\t\t\t\t\t      1 ) ADMINISTRATOR          \n";
-	cout << "\t\t\t\t\t                                 \n";
-	cout << "\t\t\t\t\t      2 ) BUYER		            \n";
-	cout << "\t\t\t\t\t                                 \n";
-	cout << "\t\t\t\t\t      3 ) EXIT		            \n";
-	cout << "Please make your choice : ";
-	cin >> choice;
+		cout << "\t\t\t\t\t_________________________________\n";
+		cout << "\t\t\t\t\t                                 \n";
+		cout << "\t\t\t\t\t      SUPERMARKET MAIN MENU      \n";
+		cout << "\t\t\t\t\t                                 \n";
+		cout << "\t\t\t\t\t_________________________________\n";
+		cout << "\t\t\t\t\t                                 \n";
+		cout << "\t\t\t\t\t      1 ) ADMINISTRATOR          \n";
+		cout << "\t\t\t\t\t                                 \n";
+		cout << "\t\t\t\t\t      2 ) BUYER		            \n";
+		cout << "\t\t\t\t\t                                 \n";
+		cout << "\t\t\t\t\t      3 ) EXIT		            \n";
+		cout << "Please make your choice : ";
+		cin >> choice;
 
-	switch (choice) {
-	case 1:
-		cout << "/t/t/t Please login to continue \n";
-		cout << "/t/t/t Enter your email: \n";
-		cin >> email;
-		cout << "Enter your password correctly: \n";
-		cin >> password;
+		switch (choice) {
+		case 1:
+			cout << "\t\t\t Please login to continue \n";
+			cout << "\t\t\t Enter your email: ";
+			cin >> email;
+			cout << "Enter your password correctly: ";
+			cin >> password;
 
-		if (email=="khalfankhalifa544@gmail.com" && password=="cpjsolutons")
-		{
-			admininstrator();
-		}
+			if (email == "khalfankhalifa544@gmail.com" && password == "cpjsolutons") {
+				admininstrator();
+			}
 			else {
 				cout << "Invalid username or password\n";
-		}
-
-		break;
+			}
+			break;
 
 		case 2:
-		buyer();
-	}
+			buyer();
+			break;
 
-	case 3: {
-		exit(0);
+		case 3:
+			exit(0);
 
-	default: {
-		cout << "Please select from the given choices";
+		default:
+			cout << "Please select from the given choices\n";
+		}
 	}
-
-	}
-	//goto m;
 }
 
 void shopping::admininstrator() {
-	int choice;
-	cout << "\n\n\n\t\t\t ADMINISTRATOR'S MENU \\t\t\t";
-	cout << "\n\t\t\t| 1)____Add product________|";
-	cout << "\n\t\t\t|                          |";
-	cout << "\n\t\t\t| 2)____Modify product_____|";
-	cout << "\n\t\t\t|                          |";
-	cout << "\n\t\t\t| 3)____Delete product_____|";
-	cout << "\n\t\t\t|                          |";
-	cout << "\n\t\t\t| 3)____Back to main menu__|";
-	cout << "\n\n Please enter your choice";
-	cin >> choice;
+	while (true) { // Replaces the 'goto m;'
+		int choice;
+		cout << "\n\n\n\t\t\t ADMINISTRATOR'S MENU \t\t\t";
+		cout << "\n\t\t\t| 1)____Add product________|";
+		cout << "\n\t\t\t|                          |";
+		cout << "\n\t\t\t| 2)____Modify product_____|";
+		cout << "\n\t\t\t|                          |";
+		cout << "\n\t\t\t| 3)____Delete product_____|";
+		cout << "\n\t\t\t|                          |";
+		cout << "\n\t\t\t| 4)____Back to main menu__|";
+		cout << "\n\n Please enter your choice: ";
+		cin >> choice;
 
-	switch (choice)
-	{
-	case 1:
-		add();
-		break;
+		switch (choice) {
+		case 1:
+			add();
+			break;
 
-	case 2:
-		edit();
-		break;
+		case 2:
+			edit();
+			break;
 
-	case 3:
-		rem();
-		break;
+		case 3:
+			rem();
+			break;
 
-	case 4:
-		menu();
-		break;
+		case 4:
+			return; // Exit to the main menu or else calling the main() function would do the same
 
-	default:
-		cout << "Invalid choice";
-
+		default:
+			cout << "Invalid choice\n";
+		}
 	}
 }
 
 void shopping::buyer() {
-	int choice;
-	cout << "\n\n\n\t\t\t       BUYER'S MENU    \\t\t\t";
-	cout << "\n\t\t\t| 1)________Buy product_________|";
-	cout << "\n\t\t\t|                               |";
-	cout << "\n\t\t\t| 2)____Back to main menu__|";
-	cout << "\n\n Please enter your choice";
-	cin >> choice;
+	while (true) { // Replaces the 'goto m;'
+		int choice;
+		cout << "\n\n\n\t\t\t       BUYER'S MENU    \t\t\t";
+		cout << "\n\t\t\t| 1)________Buy product_________|";
+		cout << "\n\t\t\t|                               |";
+		cout << "\n\t\t\t| 2)____Back to main menu_______|";
+		cout << "\n\n Please enter your choice: ";
+		cin >> choice;
 
-	switch (choice)
-	{
-	case 1:
-		receipt();
-		break;
+		switch (choice) {
+		case 1:
+			receipt();
+			break;
 
-	case 2:
-		menu();
-		break;
+		case 2:
+			return; // Exit to the main menu
 
-	default:
-		cout << "Invalid choice!";
-
+		default:
+			cout << "Invalid choice!\n";
+		}
 	}
-	//goto m;
 }
 
 void shopping::add() {
@@ -150,9 +143,9 @@ void shopping::add() {
 	cin >> pcode;
 	cout << "\n\n\t\t Enter the product name: ";
 	cin >> pname;
-	cout << "\n\n\t\t Enter the product price";
+	cout << "\n\n\t\t Enter the product price: ";
 	cin >> price;
-	cout << "\n\n\t\t Enter the product discount";
+	cout << "\n\n\t\t Enter the product discount: ";
 	cin >> dis;
 
 	data.open("database.txt", ios::in);
@@ -160,11 +153,9 @@ void shopping::add() {
 	if (!data) {
 		data.open("database.txt", ios::app | ios::out);
 		data << " " << pcode << " " << pname << " " << price << " " << dis << "\n";
+		data.close();
 	}
-		else 
-	{
+	else {
 		data >> c >> n >> p >> d;
 	}
-
-
 }
