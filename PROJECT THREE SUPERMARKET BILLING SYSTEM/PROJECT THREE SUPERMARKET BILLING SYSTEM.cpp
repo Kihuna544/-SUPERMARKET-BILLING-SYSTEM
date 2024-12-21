@@ -131,6 +131,7 @@ void shopping::buyer() {
 }
 
 void shopping::add() {
+	m:
 	fstream data;
 	int c;
 	int token = 0;
@@ -157,5 +158,76 @@ void shopping::add() {
 	}
 	else {
 		data >> c >> n >> p >> d;
+
+		while (!data.eof()) {
+
+			if (c == pcode) {
+				token++;
+			}
+		data >> c >> n >> p >> d;
+		}
+		data.close();
+	
+	if (token == 1)
+		goto m;
+
+	else {
+		data.open("database.txt", ios::app | ios::out);
+		data << " " << pcode << " " << pname << " " << price << " " << dis << "\n";
+		data.close();
+		}
+	}
+
+	cout << "Record inserted !";    
+}
+
+void shopping::edit() {
+	fstream data, data1;
+	int pkey;
+	int c;
+	int token = 0;
+	float d;
+	float p;
+	string n;
+
+	cout << "\n\t\t\t Record modificaton";
+	cout << "Enter the product code of the producty you want to change: ";
+	cin >> pkey;
+
+	data.open("database.txt", ios::in);
+	if (!data) {
+		cout << "\n\n\t\t\t No data found!";
+	}
+	else {
+		data1.open("database1.txt", ios::app | ios::out);
+		data >> pcode >> pname >> price >> dis;
+		while (!data.eof()) {
+			if (pkey == pcode) {
+				cout << "Enter new product code: ";
+				cin >> c;
+				cout << "Enter new product name: ";
+				cin >> n;
+				cout << "Enter new product price: ";
+				cin >> p;
+				cout << "Enter the products discount: ";
+				cin >> d;
+				data1 << " " << c << " " << n << " " << p << " " << d << "\n";
+				cout << "\n\n\t\t product succesfully edited!";
+				token++;
+			}
+			else {
+				data1 >> pcode >> pname >> price >> dis;
+			}
+			data >> pcode >> pname >> price >> dis;
+		}
+		data.close();
+		data1.close();
+
+		remove("database.txt");
+		rename("database1.txt", "database.txt");
+		
+		if (token == 0) {
+			cout << "\n\n\t\tOoops,record not found!";
+		}
 	}
 }
