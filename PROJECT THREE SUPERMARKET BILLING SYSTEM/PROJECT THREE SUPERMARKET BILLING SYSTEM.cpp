@@ -273,6 +273,62 @@ void shopping::rem() {
 void shopping::list() {
 	fstream data;
 	data.open("database.txt", ios::in);
-	cout << "ProNo";
+	cout << "\n\n|________________________________________|";
+	cout << "ProNo\t\tPrice\t\Name";
+	cout << "\n\n|________________________________________|";
+	data >> pcode >> pname >> price >> dis;
+
+	while (!data.eof()) {
+		cout << pcode << "\t\t" << pname << "\t\t" << price << "\t\t" << "\n";
+		data >> pcode >> pname >> price >> dis;
+	}
+	data.close();
 }
 
+void shopping::receipt() {
+	fstream data;
+m:
+	int arrc[100];
+	int arrq[100];
+	char choice;
+	int c = 0;
+	float ammount = 0;
+	float dis = 0;
+	float total = 0;
+
+	cout << "\n\n\t\t\t\t	RECEIPT";
+	data.open("database.txt", ios::in);
+	if (!data) {
+		cout << "\n\n Empty database!";
+	}
+
+	else {
+		data.close();
+
+		list();
+		cout << "\n\n|________________________________________|";
+		cout << "\n\n|                                        |";
+		cout << "\n\n|        Please place the oder           |";
+		cout << "\n\n|________________________________________|";
+		cout << "\n\n|                                        |";
+
+		do {
+			cout << "\n\nEnter Product code: ";
+			cin >> arrc[c];
+			cout << "\n\nEnter the product quantity: ";
+			cin >> arrq[c];
+			for (int i = 0;i < c;i++)
+			{
+				if (arrc[c] == arrc[i]) {
+					cout << "\n\n Duplicate product code, please try again";
+					goto m;
+				}
+			}
+			c++;
+			cout << "\n\nDo you want to buy another product? if yes press 'y' if no press 'n' ";
+			cin >> choice;
+		} while (choice == 'y');
+
+		cout << "\n\n\t\t\t|__________________RECEIPT____________________|";\
+	}
+}
