@@ -269,3 +269,10 @@ void shopping::rem() {
 		}
 	}
 }
+
+void shopping::list() {
+	fstream data;
+	data.open("database.txt", ios::in);
+	cout << "ProNo";
+}
+
