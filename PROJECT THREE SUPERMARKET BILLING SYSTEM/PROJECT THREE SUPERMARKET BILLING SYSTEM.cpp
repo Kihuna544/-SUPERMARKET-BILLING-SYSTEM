@@ -131,54 +131,52 @@ void shopping::buyer() {
 }
 
 void shopping::add() {
-	m:
 	fstream data;
-	int c;
 	int token = 0;
-	float d;
-	float p;
-	string n;
 
-	cout << "\n\n\t\t\t ADD A PRODUCT ";
-	cout << "\n\n\t\t Enter product code: ";
+	cout << "\n\t\t\t_________ADD PRODUCT_________";
+	cout << "\n\t\t\tEnter product's code: ";
 	cin >> pcode;
-	cout << "\n\n\t\t Enter the product name: ";
+	cout << "\n\t\t\tEnter product's name: ";
 	cin >> pname;
-	cout << "\n\n\t\t Enter the product price: ";
+	cout << "\n\t\t\tEnter product's price: ";
 	cin >> price;
-	cout << "\n\n\t\t Enter the product discount: ";
+	cout << "\n\t\t\tEnter product's discount: ";
 	cin >> dis;
 
 	data.open("database.txt", ios::in);
-
 	if (!data) {
+		// If file doesn't exist, create it and write the product
 		data.open("database.txt", ios::app | ios::out);
-		data << " " << pcode << " " << pname << " " << price << " " << dis << "\n";
+		data << pcode << " " << pname << " " << price << " " << dis << "\n";
 		data.close();
 	}
 	else {
-		data >> c >> n >> p >> d;
+		// Check for duplicate product
+		int c;
+		string n;
+		int p;
+		float d;
 
-		while (!data.eof()) {
-
+		while (data >> c >> n >> p >> d) {
 			if (c == pcode) {
-				token++;
+				token = 1;  // Product already exists
+				break;
 			}
-		data >> c >> n >> p >> d;
 		}
 		data.close();
-	
-	if (token == 1) 
-		goto m;
 
-	else {
-		data.open("database.txt", ios::app | ios::out);
-		data << " " << pcode << " " << pname << " " << price << " " << dis << "\n";
-		data.close();
+		if (token == 1) {
+			cout << "\n\t\t\tProduct with this code already exists! Please enter a different code.\n";
+		}
+		else {
+			// Append the new product if it's not a duplicate
+			data.open("database.txt", ios::app | ios::out);
+			data << pcode << " " << pname << " " << price << " " << dis << "\n";
+			data.close();
+			cout << "\n\t\t\tRecord successfully added!";
 		}
 	}
-
-	cout << "Record inserted !";    
 }
 
 void shopping::edit() {
