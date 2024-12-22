@@ -168,7 +168,7 @@ void shopping::add() {
 		}
 		data.close();
 	
-	if (token == 1)
+	if (token == 1) 
 		goto m;
 
 	else {
@@ -190,7 +190,7 @@ void shopping::edit() {
 	float p;
 	string n;
 
-	cout << "\n\t\t\t Record modificaton";
+	cout << "\n\t\t\t Record modificaton system \t\t\t";
 	cout << "Enter the product code of the producty you want to change: ";
 	cin >> pkey;
 
@@ -209,10 +209,10 @@ void shopping::edit() {
 				cin >> n;
 				cout << "Enter new product price: ";
 				cin >> p;
-				cout << "Enter the products discount: ";
+				cout << "Enter the new products discount: ";
 				cin >> d;
 				data1 << " " << c << " " << n << " " << p << " " << d << "\n";
-				cout << "\n\n\t\t product succesfully edited!";
+				cout << "\n\n\t\t Congrats, product edited successfully!";
 				token++;
 			}
 			else {
@@ -228,6 +228,44 @@ void shopping::edit() {
 		
 		if (token == 0) {
 			cout << "\n\n\t\tOoops,record not found!";
+		}
+	}
+}
+
+void shopping::rem() {
+	fstream data, data1;
+	int pkey;
+	int token = 0;
+	cout << "\n\t\t\t Record modificaton system \t\t\t";
+	cout << "\n\n\t\t Enter the product code of the product you want to delete: ";
+	cin >> pkey;
+	data.open("database.txt", ios::in);
+
+	if (!data) {
+		cout << "\n\n\n\t\t\t Ooops, File does't exist";
+	}
+
+	else {
+		data1.open("database1.txt", ios::app | ios::in);
+		data >> pcode >> pname >> price >> dis;
+
+		while (!data.eof()) {
+			if (pcode == pkey) {
+				cout << "\n\n\t\t\t Product deleted successfully";
+				token++;
+			}
+			else {
+				data << " " << pcode << " " << pname << " " << price << " " << dis << "\n";
+			}
+			data >> pcode >> pname >> price >> dis;
+		}
+		data.close();
+		data1.close();
+		remove("database.txt");
+		rename("database1.txt", "database.txt");
+
+		if (token == 0) {
+			cout << "\n\n\t\t\t Ooops, record not found!";
 		}
 	}
 }
