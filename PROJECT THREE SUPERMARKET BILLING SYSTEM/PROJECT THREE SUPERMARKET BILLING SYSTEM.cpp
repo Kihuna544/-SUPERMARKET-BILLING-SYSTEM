@@ -241,39 +241,48 @@ void shopping::rem() {
 	fstream data, data1;
 	int pkey;
 	int token = 0;
-	cout << "\n\t\t\t Record modificaton system \t\t\t";
+
+	cout << "\n\t\t\t Record Deletion System \t\t\t";
 	cout << "\n\n\t\t Enter the product code of the product you want to delete: ";
 	cin >> pkey;
-	data.open("database.txt", ios::in);
 
+	data.open("database.txt", ios::in);
 	if (!data) {
-		cout << "\n\n\n\t\t\t Ooops, File does't exist";
+		cout << "\n\n\n\t\t\t Ooops, File doesn't exist.";
+		return;
 	}
 
-	else {
-		data1.open("database1.txt", ios::app | ios::in);
-		data >> pcode >> pname >> price >> dis;
+	data1.open("database1.txt", ios::out); // Open temporary file in write mode
 
-		while (!data.eof()) {
-			if (pcode == pkey) {
-				cout << "\n\n\t\t\t Product deleted successfully";
-				token++;
-			}
-			else {
-				data << " " << pcode << " " << pname << " " << price << " " << dis << "\n";
-			}
-			data >> pcode >> pname >> price >> dis;
-		}
-		data.close();
-		data1.close();
-		remove("database.txt");
-		rename("database1.txt", "database.txt");
+	int pcode;
+	string pname;
+	float price, dis;
 
-		if (token == 0) {
-			cout << "\n\n\t\t\t Ooops, record not found!";
+	// Read data from the file and process it
+	while (data >> pcode >> pname >> price >> dis) {
+		if (pcode == pkey) {
+			// Skip writing this product to the new file
+			cout << "\n\n\t\t\t Product deleted successfully!";
+			token++;
 		}
+		else {
+			// Write other products to the new file
+			data1 << pcode << " " << pname << " " << price << " " << dis << "\n";
+		}
+	}
+
+	data.close();
+	data1.close();
+
+	// Replace the old file with the new one
+	remove("database.txt");
+	rename("database1.txt", "database.txt");
+
+	if (token == 0) {
+		cout << "\n\n\t\t\t Ooops, record not found!";
 	}
 }
+
 
 void shopping::list() {
 	fstream data;
