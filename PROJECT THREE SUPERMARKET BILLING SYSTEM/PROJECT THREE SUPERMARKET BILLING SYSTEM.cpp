@@ -148,7 +148,7 @@ void shopping::add() {
 	if (!data) {
 		// If file doesn't exist, create it and write the product
 		data.open("database.txt", ios::app | ios::out);
-		data << pcode << " " << pname << " " << price << " " << dis << "\n";
+		data << pcode << " " << pname << " " << price << " " << dis << " " <<"\n";
 		data.close();
 	}
 	else {
@@ -167,7 +167,7 @@ void shopping::add() {
 		data.close();
 
 		if (token == 1) {
-			cout << "\n\t\t\tProduct with this code already exists! Please enter a different code.\n";
+			cout << "\n\t\t\tProduct with this code already exists! Please enter a different code.\n";	
 		}
 		else {
 			// Append the new product if it's not a duplicate
@@ -183,13 +183,12 @@ void shopping::edit() {
 	fstream data, data1;
 	int pkey;
 	int c;
-	int token = 0;
-	float d;
-	float p;
 	string n;
+	float p, d;
+	int token = 0;
 
-	cout << "\n\t\t\t Record modificaton system \t\t\t";
-	cout << "\n\t\t\tEnter the product code of the producty you want to change: ";
+	cout << "\n\t\t\t Record modification system \t\t\t";
+	cout << "\n\t\t\tEnter the product code of the product you want to change: ";
 	cin >> pkey;
 
 	data.open("database.txt", ios::in);
@@ -197,35 +196,43 @@ void shopping::edit() {
 		cout << "\n\n\t\t\t No data found!";
 	}
 	else {
-		data1.open("database1.txt", ios::app | ios::out);
-		data >> pcode >> pname >> price >> dis;
-		while (!data.eof()) {
+		data1.open("database1.txt", ios::out);  // Open the temporary file in write mode
+
+		// Read the data from the file
+		while (data >> pcode >> pname >> price >> dis) {
 			if (pkey == pcode) {
+				// Product found, modify it
 				cout << "Enter new product code: ";
 				cin >> c;
 				cout << "Enter new product name: ";
 				cin >> n;
 				cout << "Enter new product price: ";
 				cin >> p;
-				cout << "Enter the new products discount: ";
+				cout << "Enter the new product's discount: ";
 				cin >> d;
-				data1 << " " << c << " " << n << " " << p << " " << d << "\n";
+
+				// Write the modified product to data1
+				data1 << c << " " << n << " " << p << " " << d << "\n";
 				cout << "\n\n\t\t Congrats, product edited successfully!";
 				token++;
 			}
 			else {
-				data1 >> pcode >> pname >> price >> dis;
+				// Write the existing product to data1 without modification
+				data1 << pcode << " " << pname << " " << price << " " << dis << "\n";
 			}
-			data >> pcode >> pname >> price >> dis;
 		}
+
 		data.close();
 		data1.close();
 
-		remove("database.txt");
-		rename("database1.txt", "database.txt");
-		
+		// If no product was found, show an error message
 		if (token == 0) {
-			cout << "\n\n\t\tOoops,record not found!";
+			cout << "\n\n\t\tOoops, record not found!";
+		}
+		else {
+			// Remove the old database and rename the temporary file
+			remove("database.txt");
+			rename("database1.txt", "database.txt");
 		}
 	}
 }
